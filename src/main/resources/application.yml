@@ -1,0 +1,31 @@
+server:
+  port: 8001
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/userdemo?characterEncoding=utf-8
+    username: root
+    password: root
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+   #连接池支持的最大连接数
+    max-active: 20
+    initial-size: 1
+    # 最大连接池数量
+    max-idle: 30
+    # 最小连接池数量
+    min-idle: 5
+    # 获取连接时最大等待时间，单位毫秒
+    max-wait: 60000
+
+mybatis:
+ # mapper.xml包地址
+  #mapper-locations: classpath:mappers/*.xml
+  # pojo生成包地址
+  #type-aliases-package: com.hui.pojo
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+

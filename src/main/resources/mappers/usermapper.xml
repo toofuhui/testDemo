@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hui.mapper.UserMapper">
+    <select id="findUserById" parameterType="INTEGER" resultType="com.hui.pojo.User">
+        select *
+        from user
+        where user_id=#{user_id}
+    </select>
+    <select id="getUserList" resultType="com.hui.pojo.User">
+        select *
+        from user
+    </select>
+    <insert id="add" parameterType="user" useGeneratedKeys="true"  keyProperty="user_id">
+      insert into user(real_name,user_name,password,create_time,update_time)values(#{real_name},#{user_name},#{password},#{create_time},#{update_time})
+    </insert>
+    <delete id="delete" parameterType="Integer">
+     delete from user where user_id = #{user_id}
+    </delete>
+    <update id="update" parameterType="user">
+        update user set real_name=#{real_name},user_name=#{user_name},password=#{password} where user_id=#{user_id}
+    </update>
+</mapper>
