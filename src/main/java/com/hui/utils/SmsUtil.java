@@ -4,6 +4,7 @@ import com.montnets.mwgate.common.GlobalParams;
 import com.montnets.mwgate.common.Message;
 import com.montnets.mwgate.smsutil.ConfigManager;
 import com.montnets.mwgate.smsutil.SmsSendConn;
+import org.springframework.scheduling.annotation.Scheduled;
 
 public class SmsUtil {
     public static void main(String[] args) {
@@ -32,8 +33,10 @@ public class SmsUtil {
          *            短信处理对象,在这个方法中调用发送短信功能
          * @param userid
          *            用户账号
+         *   @Scheduled(cron = "${time.cron}")
+         *   cron表达式：0 0 21 * * ? 表示每天晚上9点执行一次
          */
-
+    @Scheduled(cron = "${time.cron}")
     public static void singleSend(SmsSendConn smsSendConn, String userid) {
         try {
             // 参数类
