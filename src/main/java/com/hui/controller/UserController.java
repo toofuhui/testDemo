@@ -55,6 +55,7 @@ public class UserController {
         user.setUser_id(id);
         userService.update(user);
     }
+    //发信息
     @RequestMapping(value = "/sms/{mobile}",method = RequestMethod.POST)
     @ApiOperation(value="发短信")
     public void sendsms(@PathVariable String mobile){

@@ -10,6 +10,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -32,13 +33,16 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
     }
 
     @Override
+    // 每天21点执行一次
+    @Scheduled(cron = "0 0 21 * * ?")
     public void sendsms(String mobile) {
         String checkCode= RandomStringUtils.randomNumeric(6);
         //将验证码存入redis中
         if(StringUtils.isEmpty(checkCode)){
-            redisUtil.set("checkCode",checkCode);
-            redisUtil.expire(checkCode,60, TimeUnit.MILLISECONDS);
+            redisUtil.set("checkCode_"+mobile,checkCode);
+            redisUtil.expire("checkCode_"+mobile,60, TimeUnit.MILLISECONDS);
         }
+        System.out.println("1111111");
         //将验证码和手机号发动到rabbitMQ中
         Map<String,String> map=new HashMap<>();
         map.put("mobile",mobile);
