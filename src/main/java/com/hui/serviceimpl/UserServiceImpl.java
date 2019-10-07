@@ -1,6 +1,5 @@
 package com.hui.serviceimpl;
 
-import com.alibaba.druid.util.StringUtils;
 import com.hui.dto.UserDto;
 import com.hui.mapper.UserMapper;
 import com.hui.pojo.User;
@@ -13,8 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -31,24 +29,21 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
         BeanUtils.copyProperties(userDto,user);
         userMapper.insert(user);
     }
-
     @Override
     // 每天21点执行一次
     @Scheduled(cron = "0 0 21 * * ?")
     public void sendsms(String mobile) {
         String checkCode= RandomStringUtils.randomNumeric(6);
-        //将验证码存入redis中
-        if(StringUtils.isEmpty(checkCode)){
-            redisUtil.set("checkCode_"+mobile,checkCode);
-            redisUtil.expire("checkCode_"+mobile,60, TimeUnit.MILLISECONDS);
-        }
-        System.out.println("1111111");
+        //将验证码存入redis
+        redisUtil.set("checkcode_"+mobile,checkCode);
+        redisUtil.expire("checkcode_"+mobile,60,TimeUnit.MILLISECONDS);
         //将验证码和手机号发动到rabbitMQ中
         Map<String,String> map=new HashMap<>();
         map.put("mobile",mobile);
         map.put("checkCode",checkCode);
         rabbitTemplate.convertAndSend("sms",map);
         System.out.println(checkCode);
+
 
 
     }

@@ -1,35 +1,39 @@
-package com.hui.dto;
+package com.hui.vo;
 
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.util.Date;
-
-public class UserDto {
+//@ApiModelProperty()用于方法，字段； 表示对model属性的说明或者数据操作更改
+public class UserVO {
     private Integer user_id;
     private String real_name;
     private String mobile;
-    @NotNull(message = "user_name不能为空")
     private String user_name;
-    @NotNull(message = "密码不能为空!")
-    @Size(min = 6, max = 12, message = "密码长度必须在{min}和{max}之间")
     private String password;
-    private String status;
+    private String statusaLabel;
     private Date create_time;
     private Date update_time;
-    public Integer user_id() {
+
+    public Integer getUser_id() {
         return user_id;
     }
 
     public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
+
     public String getReal_name() {
         return real_name;
     }
 
     public void setReal_name(String real_name) {
         this.real_name = real_name;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public String getUser_name() {
@@ -48,6 +52,14 @@ public class UserDto {
         this.password = password;
     }
 
+    public String getStatusaLabel() {
+        return statusaLabel;
+    }
+
+    public void setStatusaLabel(String statusaLabel) {
+        this.statusaLabel = statusaLabel;
+    }
+
     public Date getCreate_time() {
         return create_time;
     }
@@ -64,19 +76,5 @@ public class UserDto {
         this.update_time = update_time;
     }
 
-    public String getMobile() {
-        return mobile;
-    }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }

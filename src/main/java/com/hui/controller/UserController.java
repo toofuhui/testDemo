@@ -1,16 +1,22 @@
 package com.hui.controller;
 
+import com.alibaba.druid.util.StringUtils;
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hui.dto.UserDto;
+import com.hui.enumState.StateEnum;
 import com.hui.pojo.User;
 import com.hui.service.UserService;
+import com.hui.vo.UserVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,13 +32,41 @@ public class UserController {
     }
     @RequestMapping(value = "/getall",method = RequestMethod.GET)
     @ApiOperation(value="查询列表")
-    public PageInfo<User> getAllUser(){
+    /**
+     * 返回的类为VO
+     */
+    public PageInfo<UserVO> getAllUser(){
         //pageNum ：当前页数,pageSize ：一页大小
         PageHelper.startPage(1, 3);
         List<User> userList=userService.getAll();
+        List<UserVO> listVO=new ArrayList<>();
+        UserVO userVO=new UserVO();
+        //遍历userList集合
+        for (User user : userList) {
+            System.out.println("state:"+user.getStatus());
+            System.out.println("mobile:"+user.getMobile());
+            if(user.getStatus().equals("1")){
+                //****BeanUtils.copyProperties不支持复制集合所以只能转化成对象
+                BeanUtils.copyProperties(user,userVO);
+                String statusaLabel= String.valueOf(StateEnum.OPEN.getMsg());
+                System.out.println("statusaLabel:"+statusaLabel);
+                userVO.setStatusaLabel(statusaLabel);
+                listVO.add(userVO);
+            }else if(user.getStatus().equals("0")){
+                BeanUtils.copyProperties(user,userVO);
+                String statusaLabel= String.valueOf(StateEnum.CLOSE.getMsg());
+                System.out.println("statusaLabel:"+statusaLabel);
+                userVO.setStatusaLabel(statusaLabel);
+                listVO.add(userVO);
+            }
+        }
+     /*   System.out.println("state:"+userVO.getStatusaLabel());
+        List<UserVO> listVO=new ArrayList<>();
+        BeanUtils.copyProperties(userList,listVO);*/
         //得到分页的结果对象
-        PageInfo<User> userPageInfo = new PageInfo<>(userList);
-       return  userPageInfo;
+        System.out.println("listVO:"+listVO);
+        PageInfo<UserVO> userPageInfo =new PageInfo<>(listVO);
+        return  userPageInfo;
 
     }
     @RequestMapping(value = "/add",method = RequestMethod.POST)
@@ -59,7 +93,7 @@ public class UserController {
     @RequestMapping(value = "/sms/{mobile}",method = RequestMethod.POST)
     @ApiOperation(value="发短信")
     public void sendsms(@PathVariable String mobile){
-        userService.sendsms(mobile);
+            userService.sendsms(mobile);
     }
 
 }
