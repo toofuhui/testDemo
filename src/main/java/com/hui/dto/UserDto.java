@@ -15,6 +15,7 @@ public class UserDto {
     @Size(min = 6, max = 12, message = "密码长度必须在{min}和{max}之间")
     private String password;
     private String status;
+    private String address;
     private Date create_time;
     private Date update_time;
     public Integer user_id() {
@@ -78,5 +79,13 @@ public class UserDto {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

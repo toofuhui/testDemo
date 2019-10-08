@@ -8,7 +8,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 
 @EnableSwagger2
 @SpringBootApplication(scanBasePackages={"com.hui.*"})
-@MapperScan("com.hui.mapper")
+@MapperScan(basePackages={"com.hui.mapper.*"})
 public class ApplicationUser {
     public static void main(String[] args) {
         SpringApplication.run(ApplicationUser.class);

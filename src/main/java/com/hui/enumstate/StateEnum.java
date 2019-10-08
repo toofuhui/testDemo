@@ -1,4 +1,4 @@
-package com.hui.enumState;
+package com.hui.enumstate;
 
 public enum StateEnum {
     OPEN(1,"开启"),CLOSE(0,"关闭");

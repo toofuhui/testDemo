@@ -1,11 +1,10 @@
 package com.hui.controller;
 
 import com.alibaba.druid.util.StringUtils;
-import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hui.dto.UserDto;
-import com.hui.enumState.StateEnum;
+import com.hui.enumstate.StateEnum;
 import com.hui.pojo.User;
 import com.hui.service.UserService;
 import com.hui.vo.UserVO;
