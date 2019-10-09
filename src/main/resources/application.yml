@@ -19,8 +19,10 @@ spring:
     max-wait: 60000
 
 mybatis:
-  mapper-locations: classpath:mapper/*.xml #定义xml文件位置，不是必须的，如果需要在xml写sql请配置此选项
-  type-aliases-package: com.hui.pojo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    # 注意：对应实体类的路径
+  mapper-locations: classpath:mappers/*.xml #定义xml文件位置，不是必须的，如果需要在xml写sql请配置此选项
+  type-aliases-package: com.hui.pojo.*
+  configuration:
+    mapUnderscoreToCamelCase: true                                                                                                                                                                                                                                                                                                                                                                                                                                                                 # 注意：对应实体类的路径
 mapper:
   mappers: com.hui.mapper.BaseMapper #通用基类配置
   identity: MYSQL

@@ -9,11 +9,11 @@ import javax.persistence.*;
  * 导致我根据id查询结果为null
  */
 @Table(name = "user_info")
-public class UserInfo {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    public class UserInfo {
+        @Id
+        @GeneratedValue(strategy= GenerationType.IDENTITY)
+        @Column(name = "id")
+        private Integer id;
     private Integer userId;
     private String address;
 

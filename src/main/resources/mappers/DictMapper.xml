@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hui.mapper.DistMapper">
+    <select id="getProvinceList"  resultType="com.hui.pojo.dict.Province">
+        select *
+        from dist_province limit 1,5
+    </select>
+
+    <select id="getCityList" parameterType="java.lang.String" resultType="com.hui.pojo.dict.City">
+        select *
+        from dist_city
+        where province_code=#{provinceCode}
+    </select>
+
+    <select id="getAreaList" parameterType="java.lang.String" resultType="com.hui.pojo.dict.Area">
+        select *
+        from dist_area
+        where city_code=#{cityCode}
+    </select>
+</mapper>
