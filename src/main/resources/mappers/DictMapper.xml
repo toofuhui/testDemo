@@ -17,4 +17,25 @@
         from dist_area
         where city_code=#{cityCode}
     </select>
+
+    <select id="getProvinceNameByCode" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+          province_name
+        from dist_province
+        where province_code=#{provinceCode}
+    </select>
+
+    <select id="getCityNameByCode" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        city_name
+        from dist_city
+        where city_code=#{cityCode}
+    </select>
+
+    <select id="getAreaNameByCode" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        area_name
+        from dist_area
+        where area_code=#{areaCode}
+    </select>
 </mapper>
