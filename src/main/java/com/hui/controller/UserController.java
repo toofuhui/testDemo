@@ -95,4 +95,20 @@ public class UserController {
             userService.sendsms(mobile);
     }
 
+    //用户注册
+    @RequestMapping(value = "/register/{code}",method = RequestMethod.POST)
+    @ApiOperation(value="用户注册")
+    public void register(@Valid @RequestBody User user,@PathVariable String code){
+        userService.register(user,code);
+    }
+    //判断用户是否存在
+    @RequestMapping(value = "/check/{username}",method = RequestMethod.GET)
+    @ApiOperation(value="根据用户名查询用户")
+    public String findUserByUserName(@PathVariable String username){
+       if(userService.findUserByName(username)==true){
+           return "此用户名可用";
+       }
+       return "用户名已存在";
+    }
+
 }

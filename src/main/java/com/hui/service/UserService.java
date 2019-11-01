@@ -16,4 +16,7 @@ public interface UserService extends BaseService<User>{
     //List<UserVO> getList();
     void save(UserDto userDto);
     void sendsms(String mobile);
+
+    void register(User user, String code);
+    Boolean findUserByName(String username);
 }

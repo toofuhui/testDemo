@@ -32,7 +32,7 @@ public class SmsListener {
         if(count<2){
             redisUtil.set(mobile, String.valueOf(count+1));
             redisUtil.expire(mobile,60, TimeUnit.SECONDS);
-            test.singleSend(map.get("mobile"),"E10FVP","fXgKzG",true,checkcode);
+            test.singleSend(map.get("mobile"),"E100FVP","fXgKzG",true,checkcode);
 
         }
     }

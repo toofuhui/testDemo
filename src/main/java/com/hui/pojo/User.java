@@ -1,5 +1,8 @@
 package com.hui.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.Date;
 @Table(name = "user")
@@ -15,6 +18,8 @@ private String password;
 private String status;
 private Date create_time;
 private Date update_time;
+@JsonIgnore
+private String salt;//密码的盐值
 
     public int getUserid() {
         return user_id;
@@ -40,10 +45,17 @@ private Date update_time;
         this.user_name = user_name;
     }
 
+    /**
+     * 通过查看JsonIgnore文档明白了需要在getter加上@JsonIgnore和
+     * setter加上@JsonProperty注解，属性上就不需要注解就可以实现
+     * 数据传入后端，后端无返回此属性
+     * @return
+     */
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
-
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }
@@ -92,5 +104,13 @@ private Date update_time;
                 ", create_time=" + create_time +
                 ", update_time=" + update_time +
                 '}';
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 }
