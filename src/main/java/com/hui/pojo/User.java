@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 @Table(name = "user")
 public class User {
 @Id
 @GeneratedValue(strategy= GenerationType.IDENTITY)//主键返回策略？
 @Column(name = "user_id")
+@NotNull
 private Integer user_id;
 private String real_name;
 private String mobile;
@@ -21,11 +23,11 @@ private Date update_time;
 @JsonIgnore
 private String salt;//密码的盐值
 
-    public int getUserid() {
+    public Integer getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
 

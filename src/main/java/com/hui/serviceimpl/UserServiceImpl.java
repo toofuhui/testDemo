@@ -89,12 +89,20 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 
     }
 
-
     @Override
-    public Boolean findUserByName(String username) {
-        int count= userMapper.findUserByName(username);
-        return count==0?true:false;
+    public User login(User user) {
+        User newUser=userMapper.findUserByName(user.getUser_name());
+        //特别注意，因为MD5加密不可逆，所以登录时对密码进行验证时，
+        //必须重新对输入的密码进行加密，然后与数据库中加密的密码进行比较
+        String password=CodecUtils.md5Hex(user.getPassword(),newUser.getSalt());
+        System.out.println("password:"+password);
+        if(newUser!=null && password.equals(newUser.getPassword())){
+            return newUser;
+        }
+        return null;
     }
+
+
 }
 
     /*@Autowired

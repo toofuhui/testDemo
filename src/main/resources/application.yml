@@ -40,5 +40,9 @@ pagehelper:
   params: count=countSql
 time:
   cron: 0 0 21 * * ?
+jwt:
+  config:
+    key: itcast
+    ttl: 3600000
 
 

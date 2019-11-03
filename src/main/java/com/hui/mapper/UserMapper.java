@@ -14,6 +14,6 @@ public interface UserMapper extends BaseMapper<User> {
     void add(User user);
     void delete(Integer id);
     void update(User user);*/
-   @Select("SELECT COUNT(user_name) FROM USER WHERE user_name=#{user_name}")
-   int findUserByName(@Param("user_name") String user_name);
+   @Select("SELECT * FROM USER WHERE user_name=#{user_name}")
+   User findUserByName(@Param("user_name") String user_name);
 }

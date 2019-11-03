@@ -18,5 +18,6 @@ public interface UserService extends BaseService<User>{
     void sendsms(String mobile);
 
     void register(User user, String code);
-    Boolean findUserByName(String username);
+
+    User login(User user);
 }
